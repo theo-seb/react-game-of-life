@@ -19,8 +19,8 @@ function App() {
               <div key={`${i}-${j}`} style={{
                 backgroundColor: cell ? 'black': 'white',
                 border: '1px black solid',
-                height: '10px',
-                width: '10px',
+                height: `${100 / ROWS}vh`,
+                width: `${100 / COLUMNS}vw`,
               }} />
             ))
           }</div>)
