@@ -42,6 +42,7 @@ function App() {
 
   const gridRef = useRef(grid);
   gridRef.current = grid;
+  const intervalRef = useRef(null);
 
   const onCellClick = (i, j) => {
     const newGrid = copyGrid(grid);
@@ -49,13 +50,10 @@ function App() {
     setGrid(newGrid);
   };
 
-  let interval;
-
   const handleGame = () => {
-    if (gameRunning) {
-      if (interval) clearInterval(interval);
-    } else {
-      interval = setInterval(() => {
+    if (gameRunning && intervalRef.current) clearInterval(intervalRef.current);
+    else {
+      intervalRef.current = setInterval(() => {
         const newGrid = copyGrid(gridRef.current);
         for (let i = 0; i < ROWS; i++) {
           for (let j = 0; j < COLUMNS; j++) {
