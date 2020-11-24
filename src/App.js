@@ -66,6 +66,10 @@ function App() {
     setGameRunning(!gameRunning);
   };
 
+  const clear = () => {
+    setGrid(emptyGrid);
+  };
+
   return (
     <>
       <header style={{
@@ -77,6 +81,16 @@ function App() {
         justifyContent: 'flex-end',
         alignItems: 'center'
       }}>
+        {!gameRunning && <button onClick={clear} style={{
+          margin: '10px',
+          padding: '10px 20px',
+          backgroundColor: 'lightgrey',
+          textAlign: 'center',
+          border: 'none',
+          borderRadius: '5px',
+          fontWeight: 'bold',
+          fontSize: '18px',
+        }}>Clear</button>}
         <button onClick={handleGame} style={{
           margin: '10px',
           padding: '10px 20px',
