@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import HeaderButton from './HeaderButton';
+import HeaderCheckbox from './HeaderCheckbox';
 import SizeInput from './SizeInput';
 
 const DEFAULT_COLS = 20;
@@ -109,19 +110,8 @@ function App() {
           {!gameRunning && <HeaderButton onClick={resizeGrid} text="Resize" />}
         </form>
         <div>
-          <input type="checkbox" checked={enableColorGradient}
-            onClick={() => { setEnableColorGradient(!enableColorGradient) }}
-            name="colorGradient" style={{
-              cursor: 'pointer',
-            }} />
-          <label for="colorGradient" onClick={() => { setEnableColorGradient(!enableColorGradient) }} style={{
-            fontWeight: 'bold',
-            fontSize: '18px',
-            color: 'lightgrey',
-            marginRight: '10px',
-            paddingLeft: '5px',
-            cursor: 'pointer',
-          }}>Color gradient</label>
+          <HeaderCheckbox name="colorGradient" label="Color gradient" 
+            checked={enableColorGradient} onClick={() => { setEnableColorGradient(!enableColorGradient) }}/>
           {!gameRunning && <HeaderButton onClick={clear} text="Clear" />}
           <HeaderButton onClick={handleGame} text={gameRunning ? 'Stop' : 'Start'} />
         </div>
