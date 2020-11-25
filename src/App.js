@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import HeaderButton from './HeaderButton';
 
 const DEFAULT_COLS = 20;
 const DEFAULT_ROWS = 10;
@@ -124,17 +125,7 @@ function App() {
             width: '50px',
             textAlign: 'center',
           }} />}
-          {!gameRunning && <button onClick={resizeGrid} style={{
-            margin: '10px',
-            padding: '10px 20px',
-            backgroundColor: 'lightgrey',
-            textAlign: 'center',
-            border: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            cursor: 'pointer',
-          }}>Resize</button>}
+          {!gameRunning && <HeaderButton onClick={resizeGrid} text="Resize" />}
         </form>
         <div>
           <input type="checkbox" checked={enableColorGradient} 
@@ -150,28 +141,8 @@ function App() {
             paddingLeft: '5px',
             cursor: 'pointer',
           }}>Color gradient</label>
-          {!gameRunning && <button onClick={clear} style={{
-            margin: '10px',
-            padding: '10px 20px',
-            backgroundColor: 'lightgrey',
-            textAlign: 'center',
-            border: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            cursor: 'pointer',
-          }}>Clear</button>}
-          <button onClick={handleGame} style={{
-            margin: '10px',
-            padding: '10px 20px',
-            backgroundColor: 'lightgrey',
-            textAlign: 'center',
-            border: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            cursor: 'pointer',
-          }}>{gameRunning ? 'Stop' : 'Start'}</button>
+          {!gameRunning && <HeaderButton onClick={clear} text="Clear"/>}
+          <HeaderButton onClick={handleGame} text={gameRunning ? 'Stop' : 'Start'}/>
         </div>
       </header>
       <div>
