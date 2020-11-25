@@ -83,6 +83,12 @@ function App() {
     setGrid(newGrid);
   };
 
+  const getCellColor = (i, j) => {
+    // const val = (255 / grid.length) * i;
+    const val = (255 / (grid.length + grid[0].length)) * (i + j);
+    return `rgba(${val},${val},${val})`;
+  };
+
   return (
     <>
       <header style={{
@@ -162,7 +168,7 @@ function App() {
                   <div
                     key={`${i}-${j}`}
                     style={{
-                      backgroundColor: cell ? 'black' : 'white',
+                      backgroundColor: cell ? getCellColor(i, j) : 'white',
                       border: '1px black solid',
                       height: `calc(${100 / grid.length}vh - ${HEADER_HEIGHT_PX / grid.length}px)`,
                       width: `${100 / grid[0].length}vw`,
