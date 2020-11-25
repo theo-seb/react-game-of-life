@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 
-const COLUMNS = 20;
-const ROWS = 10;
+const DEFAULT_COLS = 20;
+const DEFAULT_ROWS = 10;
 const HEADER_HEIGHT_PX = 60;
 const POSSIBLE_NEIGHBOURS = [
   [1, 0],
@@ -20,7 +20,7 @@ const countAliveNeighbours = (grid, i, j) => {
   return POSSIBLE_NEIGHBOURS.reduce((count, [nI, nJ]) => {
     const neighbourI = i + nI;
     const neighbourJ = j + nJ;
-    if (neighbourI >= 0 && neighbourI < ROWS && neighbourJ >= 0 && neighbourJ < COLUMNS) {
+    if (neighbourI >= 0 && neighbourI < DEFAULT_ROWS && neighbourJ >= 0 && neighbourJ < DEFAULT_COLS) {
       return count + grid[neighbourI][neighbourJ];
     }
     return count;
@@ -35,9 +35,13 @@ const getNextCellState = (grid, i, j) => {
   return 0; // All other live cells die in the next generation. Similarly, all other dead cells stay dead
 };
 
+const getEmptyGrid = (nbRows, nbCols) => {
+  return Array(nbRows).fill().map(() => Array(nbCols).fill(0));
+};
+
 function App() {
-  const emptyGrid = Array(ROWS).fill().map((x) => Array(COLUMNS).fill(0));
-  const [grid, setGrid] = useState(emptyGrid);
+  const [gridSize, setGridSize] = useState({nbRows: DEFAULT_ROWS, nbCols: DEFAULT_COLS});
+  const [grid, setGrid] = useState(getEmptyGrid(DEFAULT_ROWS, DEFAULT_COLS));
   const [gameRunning, setGameRunning] = useState(false);
 
   const gridRef = useRef(grid);
@@ -55,8 +59,8 @@ function App() {
     else {
       intervalRef.current = setInterval(() => {
         const newGrid = copyGrid(gridRef.current);
-        for (let i = 0; i < ROWS; i++) {
-          for (let j = 0; j < COLUMNS; j++) {
+        for (let i = 0; i < DEFAULT_ROWS; i++) {
+          for (let j = 0; j < DEFAULT_COLS; j++) {
             newGrid[i][j] = getNextCellState(gridRef.current, i, j);
           }
         }
@@ -67,7 +71,16 @@ function App() {
   };
 
   const clear = () => {
-    setGrid(emptyGrid);
+    setGrid(getEmptyGrid(grid.length, grid[0].length));
+  };
+
+  const onInputChange = (e, prop) => {
+    setGridSize({...gridSize, [prop]: parseInt(e.target.value, 10)})
+  };
+
+  const resizeGrid = () => {
+    const newGrid = getEmptyGrid(gridSize.nbRows, gridSize.nbCols);
+    setGrid(newGrid);
   };
 
   return (
@@ -82,7 +95,8 @@ function App() {
         alignItems: 'center'
       }}>
         <form onSubmit={(e) => e.preventDefault()}>
-          {!gameRunning && <input style={{
+          {!gameRunning && <input type="number" value={gridSize.nbRows} 
+            onChange={(e) => onInputChange(e, 'nbRows')} style={{
             margin: '10px',
             padding: '10px 0',
             border: 'none',
@@ -92,7 +106,8 @@ function App() {
             width: '50px',
             textAlign: 'center',
           }} />}
-          {!gameRunning && <input style={{
+          {!gameRunning && <input type="number" value={gridSize.nbCols} 
+            onChange={(e) => onInputChange(e, 'nbCols')} style={{
             margin: '10px 10px 10px 0',
             padding: '10px 0',
             border: 'none',
@@ -102,7 +117,7 @@ function App() {
             width: '50px',
             textAlign: 'center',
           }} />}
-          {!gameRunning && <button style={{
+          {!gameRunning && <button onClick={resizeGrid} style={{
             margin: '10px',
             padding: '10px 20px',
             backgroundColor: 'lightgrey',
@@ -149,8 +164,8 @@ function App() {
                     style={{
                       backgroundColor: cell ? 'black' : 'white',
                       border: '1px black solid',
-                      height: `calc(${100 / ROWS}vh - ${HEADER_HEIGHT_PX / ROWS}px)`,
-                      width: `${100 / COLUMNS}vw`,
+                      height: `calc(${100 / grid.length}vh - ${HEADER_HEIGHT_PX / grid.length}px)`,
+                      width: `${100 / grid[0].length}vw`,
                     }}
                     onClick={() => onCellClick(i, j)} />
                 ))
