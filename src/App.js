@@ -43,6 +43,7 @@ function App() {
   const [gridSize, setGridSize] = useState({nbRows: DEFAULT_ROWS, nbCols: DEFAULT_COLS});
   const [grid, setGrid] = useState(getEmptyGrid(DEFAULT_ROWS, DEFAULT_COLS));
   const [gameRunning, setGameRunning] = useState(false);
+  const [enableColorGradient, setEnableColorGradient] = useState(true);
 
   const gridRef = useRef(grid);
   gridRef.current = grid;
@@ -84,7 +85,7 @@ function App() {
   };
 
   const getCellColor = (i, j) => {
-    // const val = (255 / grid.length) * i;
+    if (!enableColorGradient) return 'black';
     const val = (255 / (grid.length + grid[0].length)) * (i + j);
     return `rgba(${val},${val},${val})`;
   };
@@ -132,9 +133,23 @@ function App() {
             borderRadius: '5px',
             fontWeight: 'bold',
             fontSize: '18px',
+            cursor: 'pointer',
           }}>Resize</button>}
         </form>
         <div>
+          <input type="checkbox" checked={enableColorGradient} 
+            onClick={() => {setEnableColorGradient(!enableColorGradient)}}
+            name="colorGradient" style={{
+            cursor: 'pointer',
+          }}/>
+          <label for="colorGradient" onClick={() => {setEnableColorGradient(!enableColorGradient)}} style={{
+            fontWeight: 'bold',
+            fontSize: '18px',
+            color: 'lightgrey',
+            marginRight: '10px',
+            paddingLeft: '5px',
+            cursor: 'pointer',
+          }}>Color gradient</label>
           {!gameRunning && <button onClick={clear} style={{
             margin: '10px',
             padding: '10px 20px',
@@ -144,6 +159,7 @@ function App() {
             borderRadius: '5px',
             fontWeight: 'bold',
             fontSize: '18px',
+            cursor: 'pointer',
           }}>Clear</button>}
           <button onClick={handleGame} style={{
             margin: '10px',
@@ -154,6 +170,7 @@ function App() {
             borderRadius: '5px',
             fontWeight: 'bold',
             fontSize: '18px',
+            cursor: 'pointer',
           }}>{gameRunning ? 'Stop' : 'Start'}</button>
         </div>
       </header>
