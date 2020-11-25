@@ -78,29 +78,63 @@ function App() {
         width: '100vw',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        {!gameRunning && <button onClick={clear} style={{
-          margin: '10px',
-          padding: '10px 20px',
-          backgroundColor: 'lightgrey',
-          textAlign: 'center',
-          border: 'none',
-          borderRadius: '5px',
-          fontWeight: 'bold',
-          fontSize: '18px',
-        }}>Clear</button>}
-        <button onClick={handleGame} style={{
-          margin: '10px',
-          padding: '10px 20px',
-          backgroundColor: 'lightgrey',
-          textAlign: 'center',
-          border: 'none',
-          borderRadius: '5px',
-          fontWeight: 'bold',
-          fontSize: '18px',
-        }}>{gameRunning ? 'Stop' : 'Start'}</button>
+        <form onSubmit={(e) => e.preventDefault()}>
+          {!gameRunning && <input style={{
+            margin: '10px',
+            padding: '10px 0',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            width: '50px',
+            textAlign: 'center',
+          }} />}
+          {!gameRunning && <input style={{
+            margin: '10px 10px 10px 0',
+            padding: '10px 0',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            width: '50px',
+            textAlign: 'center',
+          }} />}
+          {!gameRunning && <button style={{
+            margin: '10px',
+            padding: '10px 20px',
+            backgroundColor: 'lightgrey',
+            textAlign: 'center',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+          }}>Resize</button>}
+        </form>
+        <div>
+          {!gameRunning && <button onClick={clear} style={{
+            margin: '10px',
+            padding: '10px 20px',
+            backgroundColor: 'lightgrey',
+            textAlign: 'center',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+          }}>Clear</button>}
+          <button onClick={handleGame} style={{
+            margin: '10px',
+            padding: '10px 20px',
+            backgroundColor: 'lightgrey',
+            textAlign: 'center',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+          }}>{gameRunning ? 'Stop' : 'Start'}</button>
+        </div>
       </header>
       <div>
         {
