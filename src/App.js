@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import HeaderButton from './HeaderButton';
+import SizeInput from './SizeInput';
 
 const DEFAULT_COLS = 20;
 const DEFAULT_ROWS = 10;
@@ -41,7 +42,7 @@ const getEmptyGrid = (nbRows, nbCols) => {
 };
 
 function App() {
-  const [gridSize, setGridSize] = useState({nbRows: DEFAULT_ROWS, nbCols: DEFAULT_COLS});
+  const [gridSize, setGridSize] = useState({ nbRows: DEFAULT_ROWS, nbCols: DEFAULT_COLS });
   const [grid, setGrid] = useState(getEmptyGrid(DEFAULT_ROWS, DEFAULT_COLS));
   const [gameRunning, setGameRunning] = useState(false);
   const [enableColorGradient, setEnableColorGradient] = useState(true);
@@ -77,7 +78,7 @@ function App() {
   };
 
   const onInputChange = (e, prop) => {
-    setGridSize({...gridSize, [prop]: parseInt(e.target.value, 10)})
+    setGridSize({ ...gridSize, [prop]: parseInt(e.target.value, 10) })
   };
 
   const resizeGrid = () => {
@@ -103,37 +104,17 @@ function App() {
         alignItems: 'center'
       }}>
         <form onSubmit={(e) => e.preventDefault()}>
-          {!gameRunning && <input type="number" value={gridSize.nbRows} 
-            onChange={(e) => onInputChange(e, 'nbRows')} style={{
-            margin: '10px',
-            padding: '10px 0',
-            border: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            width: '50px',
-            textAlign: 'center',
-          }} />}
-          {!gameRunning && <input type="number" value={gridSize.nbCols} 
-            onChange={(e) => onInputChange(e, 'nbCols')} style={{
-            margin: '10px 10px 10px 0',
-            padding: '10px 0',
-            border: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            width: '50px',
-            textAlign: 'center',
-          }} />}
+          {!gameRunning && <SizeInput value={gridSize.nbRows} onChange={(e) => onInputChange(e, 'nbRows')} />}
+          {!gameRunning && <SizeInput value={gridSize.nbCols} onChange={(e) => onInputChange(e, 'nbCols')} />}
           {!gameRunning && <HeaderButton onClick={resizeGrid} text="Resize" />}
         </form>
         <div>
-          <input type="checkbox" checked={enableColorGradient} 
-            onClick={() => {setEnableColorGradient(!enableColorGradient)}}
+          <input type="checkbox" checked={enableColorGradient}
+            onClick={() => { setEnableColorGradient(!enableColorGradient) }}
             name="colorGradient" style={{
-            cursor: 'pointer',
-          }}/>
-          <label for="colorGradient" onClick={() => {setEnableColorGradient(!enableColorGradient)}} style={{
+              cursor: 'pointer',
+            }} />
+          <label for="colorGradient" onClick={() => { setEnableColorGradient(!enableColorGradient) }} style={{
             fontWeight: 'bold',
             fontSize: '18px',
             color: 'lightgrey',
@@ -141,8 +122,8 @@ function App() {
             paddingLeft: '5px',
             cursor: 'pointer',
           }}>Color gradient</label>
-          {!gameRunning && <HeaderButton onClick={clear} text="Clear"/>}
-          <HeaderButton onClick={handleGame} text={gameRunning ? 'Stop' : 'Start'}/>
+          {!gameRunning && <HeaderButton onClick={clear} text="Clear" />}
+          <HeaderButton onClick={handleGame} text={gameRunning ? 'Stop' : 'Start'} />
         </div>
       </header>
       <div>
