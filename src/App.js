@@ -20,7 +20,7 @@ const countAliveNeighbours = (grid, i, j) => {
   return POSSIBLE_NEIGHBOURS.reduce((count, [nI, nJ]) => {
     const neighbourI = i + nI;
     const neighbourJ = j + nJ;
-    if (neighbourI >= 0 && neighbourI < DEFAULT_ROWS && neighbourJ >= 0 && neighbourJ < DEFAULT_COLS) {
+    if (neighbourI >= 0 && neighbourI < grid.length && neighbourJ >= 0 && neighbourJ < grid[0].length) {
       return count + grid[neighbourI][neighbourJ];
     }
     return count;
@@ -59,8 +59,8 @@ function App() {
     else {
       intervalRef.current = setInterval(() => {
         const newGrid = copyGrid(gridRef.current);
-        for (let i = 0; i < DEFAULT_ROWS; i++) {
-          for (let j = 0; j < DEFAULT_COLS; j++) {
+        for (let i = 0; i < newGrid.length; i++) {
+          for (let j = 0; j < newGrid[0].length; j++) {
             newGrid[i][j] = getNextCellState(gridRef.current, i, j);
           }
         }
