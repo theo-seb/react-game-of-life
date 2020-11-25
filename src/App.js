@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import HeaderButton from './HeaderButton';
-import HeaderCheckbox from './HeaderCheckbox';
-import SizeInput from './SizeInput';
+import HeaderButton from './components/HeaderButton';
+import HeaderCheckbox from './components/HeaderCheckbox';
+import SizeInput from './components/SizeInput';
 
 const DEFAULT_COLS = 20;
 const DEFAULT_ROWS = 10;
