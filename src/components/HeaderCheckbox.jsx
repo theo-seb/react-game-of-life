@@ -6,7 +6,7 @@ const HeaderCheckbox = ({ name, label, checked, onClick }) => {
         name={name} style={{
           cursor: 'pointer',
         }} />
-      <label for={name} onClick={onClick} style={{
+      <label htmlFor={name} onClick={onClick} style={{
         fontWeight: 'bold',
         fontSize: '18px',
         color: 'lightgrey',
