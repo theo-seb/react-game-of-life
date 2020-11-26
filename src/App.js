@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import Cell from './components/Cell';
 import Grid from './components/Grid';
 import Header from './components/Header';
 
