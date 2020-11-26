@@ -1,7 +1,5 @@
 import { useState, useRef } from 'react';
-import HeaderButton from './components/HeaderButton';
-import HeaderCheckbox from './components/HeaderCheckbox';
-import SizeInput from './components/SizeInput';
+import Header from './components/Header';
 
 const DEFAULT_COLS = 20;
 const DEFAULT_ROWS = 10;
@@ -74,7 +72,7 @@ function App() {
     setGameRunning(!gameRunning);
   };
 
-  const clear = () => {
+  const clearGrid = () => {
     setGrid(getEmptyGrid(grid.length, grid[0].length));
   };
 
@@ -96,27 +94,18 @@ function App() {
 
   return (
     <>
-      <header style={{
-        height: `${HEADER_HEIGHT_PX}px`,
-        backgroundColor: 'black',
-        width: '100vw',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <form onSubmit={(e) => e.preventDefault()}>
-          {!gameRunning && <SizeInput name="rows" value={gridSize.nbRows} onChange={onInputChange} />}
-          {!gameRunning && <SizeInput name="cols" value={gridSize.nbCols} onChange={onInputChange} />}
-          {!gameRunning && <HeaderButton onClick={resizeGrid} text="Resize" />}
-        </form>
-        <div>
-          <HeaderCheckbox name="colorGradient" label="Color gradient" 
-            checked={enableColorGradient} onClick={() => { setEnableColorGradient(!enableColorGradient) }}/>
-          {!gameRunning && <HeaderButton onClick={clear} text="Clear" />}
-          <HeaderButton onClick={handleGame} text={gameRunning ? 'Stop' : 'Start'} />
-        </div>
-      </header>
+      <Header 
+        headerHeigth={HEADER_HEIGHT_PX}
+        gameRunning={gameRunning}
+        numberOfRows={gridSize.nbRows}
+        numberOfColumns={gridSize.nbCols}
+        enableColorGradient={enableColorGradient}
+        onResize={resizeGrid}
+        onClear={clearGrid}
+        onStartOrStop={handleGame}
+        onColorGradient={() => { setEnableColorGradient(!enableColorGradient) }}
+        onSizeInputChange={onInputChange}
+      />
       <div>
         {
           grid.map((row, i) => (
