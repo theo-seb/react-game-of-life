@@ -1,6 +1,6 @@
-const SizeInput = ({ value, onChange }) => {
+const SizeInput = ({ value, onChange, name }) => {
   return (
-    <input type="number" value={value}
+    <input type="number" value={value} data-name={name}
       onChange={onChange} style={{
         margin: '10px',
         padding: '10px 0',

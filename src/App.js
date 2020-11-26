@@ -78,7 +78,8 @@ function App() {
     setGrid(getEmptyGrid(grid.length, grid[0].length));
   };
 
-  const onInputChange = (e, prop) => {
+  const onInputChange = (e) => {
+    const prop = e.target.dataset.name === 'rows' ? 'nbRows' : 'nbCols';
     setGridSize({ ...gridSize, [prop]: parseInt(e.target.value, 10) })
   };
 
@@ -105,8 +106,8 @@ function App() {
         alignItems: 'center'
       }}>
         <form onSubmit={(e) => e.preventDefault()}>
-          {!gameRunning && <SizeInput value={gridSize.nbRows} onChange={(e) => onInputChange(e, 'nbRows')} />}
-          {!gameRunning && <SizeInput value={gridSize.nbCols} onChange={(e) => onInputChange(e, 'nbCols')} />}
+          {!gameRunning && <SizeInput name="rows" value={gridSize.nbRows} onChange={onInputChange} />}
+          {!gameRunning && <SizeInput name="cols" value={gridSize.nbCols} onChange={onInputChange} />}
           {!gameRunning && <HeaderButton onClick={resizeGrid} text="Resize" />}
         </form>
         <div>
