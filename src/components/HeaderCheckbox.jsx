@@ -2,7 +2,7 @@ const HeaderCheckbox = ({ name, label, checked, onClick }) => {
   return (
     <>
       <input type="checkbox" checked={checked}
-        onClick={onClick}
+        onChange={onClick}
         name={name} style={{
           cursor: 'pointer',
         }} />
