@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import Cell from './components/Cell';
+import Grid from './components/Grid';
 import Header from './components/Header';
 
 const DEFAULT_COLS = 20;
@@ -95,7 +96,7 @@ function App() {
 
   return (
     <>
-      <Header 
+      <Header
         headerHeigth={HEADER_HEIGHT_PX}
         gameRunning={gameRunning}
         numberOfRows={gridSize.nbRows}
@@ -107,24 +108,12 @@ function App() {
         onColorGradient={() => { setEnableColorGradient(!enableColorGradient) }}
         onSizeInputChange={onInputChange}
       />
-      <div>
-        {
-          grid.map((row, i) => (
-            <div key={i} style={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}>{
-                row.map((cell, j) => (
-                  <Cell key={`${i}-${j}`} onCellClick={() => onCellClick(i, j)}
-                    color={cell ? getCellColor(i, j) : 'white'} size={{
-                      height: `calc(${100 / grid.length}vh - ${HEADER_HEIGHT_PX / grid.length}px)`,
-                      width: `${100 / grid[0].length}vw`
-                    }}/>
-                ))
-              }</div>)
-          )
-        }
-      </div>
+      <Grid grid={grid}
+        onCellClick={onCellClick}
+        getCellColor={getCellColor}
+        cellHeight={`calc(${100 / grid.length}vh - ${HEADER_HEIGHT_PX / grid.length}px)`}
+        cellWidth={`${100 / grid[0].length}vw`}
+      />
     </>
   );
 }
