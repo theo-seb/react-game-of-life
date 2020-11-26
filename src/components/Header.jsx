@@ -8,11 +8,13 @@ const Header = ({
   numberOfRows,
   numberOfColumns,
   enableColorGradient,
+  timeInterval,
   onResize,
   onClear,
   onStartOrStop,
   onColorGradient,
   onSizeInputChange,
+  onIntervalInputChange
 }) => {
   return (
     <header style={{
@@ -30,7 +32,7 @@ const Header = ({
         {!gameRunning && <HeaderButton onClick={onResize} text="Resize" />}
       </form>
       <form onSubmit={(e) => e.preventDefault()}>
-        {!gameRunning && <HeaderNumberInput />}
+        {!gameRunning && <HeaderNumberInput value={timeInterval} onChange={onIntervalInputChange}/>}
         {!gameRunning && <HeaderButton text="Change interval" />}
       </form>
       <div>

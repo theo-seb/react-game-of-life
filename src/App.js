@@ -9,6 +9,7 @@ function App() {
   const [grid, setGrid] = useState(getEmptyGrid(DEFAULT_ROWS, DEFAULT_COLS));
   const [gameRunning, setGameRunning] = useState(false);
   const [enableColorGradient, setEnableColorGradient] = useState(true);
+  const [timeInterval, setTimeInterval] = useState(DEFAULT_INTERVAL);
 
   const gridRef = useRef(grid);
   gridRef.current = grid;
@@ -31,7 +32,7 @@ function App() {
           }
         }
         setGrid(newGrid);
-      }, DEFAULT_INTERVAL);
+      }, timeInterval);
     }
     setGameRunning(!gameRunning);
   };
@@ -40,9 +41,13 @@ function App() {
     setGrid(getEmptyGrid(grid.length, grid[0].length));
   };
 
-  const onInputChange = (e) => {
+  const onSizeInputChange = (e) => {
     const prop = e.target.dataset.name === 'rows' ? 'nbRows' : 'nbCols';
     setGridSize({ ...gridSize, [prop]: parseInt(e.target.value, 10) })
+  };
+
+  const onIntervalInputChange = (e) => {
+    setTimeInterval(parseInt(e.target.value, 10));
   };
 
   const resizeGrid = () => {
@@ -64,11 +69,13 @@ function App() {
         numberOfRows={gridSize.nbRows}
         numberOfColumns={gridSize.nbCols}
         enableColorGradient={enableColorGradient}
+        timeInterval={timeInterval}
         onResize={resizeGrid}
         onClear={clearGrid}
         onStartOrStop={handleGame}
         onColorGradient={() => { setEnableColorGradient(!enableColorGradient) }}
-        onSizeInputChange={onInputChange}
+        onSizeInputChange={onSizeInputChange}
+        onIntervalInputChange={onIntervalInputChange}
       />
       <Grid grid={grid}
         onCellClick={onCellClick}
