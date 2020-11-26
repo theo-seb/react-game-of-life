@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import Cell from './components/Cell';
 import Header from './components/Header';
 
 const DEFAULT_COLS = 20;
@@ -114,15 +115,11 @@ function App() {
               flexDirection: 'row',
             }}>{
                 row.map((cell, j) => (
-                  <div
-                    key={`${i}-${j}`}
-                    style={{
-                      backgroundColor: cell ? getCellColor(i, j) : 'white',
-                      border: '1px black solid',
+                  <Cell key={`${i}-${j}`} onCellClick={() => onCellClick(i, j)}
+                    color={cell ? getCellColor(i, j) : 'white'} size={{
                       height: `calc(${100 / grid.length}vh - ${HEADER_HEIGHT_PX / grid.length}px)`,
-                      width: `${100 / grid[0].length}vw`,
-                    }}
-                    onClick={() => onCellClick(i, j)} />
+                      width: `${100 / grid[0].length}vw`
+                    }}/>
                 ))
               }</div>)
           )
