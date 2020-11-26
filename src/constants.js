@@ -11,3 +11,4 @@ export const POSSIBLE_NEIGHBOURS = [
   [0, -1],
   [1, -1],
 ];
+export const DEFAULT_INTERVAL = 200;

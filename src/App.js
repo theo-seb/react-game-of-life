@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import Grid from './components/Grid';
 import Header from './components/Header';
-import { DEFAULT_COLS, DEFAULT_ROWS, HEADER_HEIGHT_PX, POSSIBLE_NEIGHBOURS } from './constants';
+import { DEFAULT_COLS, DEFAULT_ROWS, HEADER_HEIGHT_PX, POSSIBLE_NEIGHBOURS, DEFAULT_INTERVAL } from './constants';
 
 const copyGrid = (grid) => grid.map((row) => [...row]);
 
@@ -55,7 +55,7 @@ function App() {
           }
         }
         setGrid(newGrid);
-      }, 200);
+      }, DEFAULT_INTERVAL);
     }
     setGameRunning(!gameRunning);
   };
