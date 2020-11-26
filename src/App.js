@@ -1,20 +1,7 @@
 import { useState, useRef } from 'react';
 import Grid from './components/Grid';
 import Header from './components/Header';
-
-const DEFAULT_COLS = 20;
-const DEFAULT_ROWS = 10;
-const HEADER_HEIGHT_PX = 60;
-const POSSIBLE_NEIGHBOURS = [
-  [1, 0],
-  [1, 1],
-  [0, 1],
-  [-1, 1],
-  [-1, 0],
-  [-1, -1],
-  [0, -1],
-  [1, -1],
-];
+import { DEFAULT_COLS, DEFAULT_ROWS, HEADER_HEIGHT_PX, POSSIBLE_NEIGHBOURS } from './constants';
 
 const copyGrid = (grid) => grid.map((row) => [...row]);
 
