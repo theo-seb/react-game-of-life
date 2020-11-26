@@ -1,6 +1,6 @@
 import HeaderButton from './HeaderButton';
 import HeaderCheckbox from './HeaderCheckbox';
-import SizeInput from './SizeInput';
+import HeaderNumberInput from './HeaderNumberInput';
 
 const Header = ({
   headerHeigth,
@@ -25,13 +25,19 @@ const Header = ({
       alignItems: 'center'
     }}>
       <form onSubmit={(e) => e.preventDefault()}>
-        {!gameRunning && <SizeInput name="rows" value={numberOfRows} onChange={onSizeInputChange} />}
-        {!gameRunning && <SizeInput name="cols" value={numberOfColumns} onChange={onSizeInputChange} />}
+        {!gameRunning && <HeaderNumberInput name="rows" value={numberOfRows} onChange={onSizeInputChange} />}
+        {!gameRunning && <HeaderNumberInput name="cols" value={numberOfColumns} onChange={onSizeInputChange} />}
         {!gameRunning && <HeaderButton onClick={onResize} text="Resize" />}
       </form>
+      <form onSubmit={(e) => e.preventDefault()}>
+        {!gameRunning && <HeaderNumberInput />}
+        {!gameRunning && <HeaderButton text="Change interval" />}
+      </form>
       <div>
-        <HeaderCheckbox name="colorGradient" label="Color gradient"
-          checked={enableColorGradient} onClick={onColorGradient} />
+        {!gameRunning && <HeaderCheckbox name="colorGradient" label="Color gradient"
+          checked={enableColorGradient} onClick={onColorGradient} />}
+      </div>
+      <div>
         {!gameRunning && <HeaderButton onClick={onClear} text="Clear" />}
         <HeaderButton onClick={onStartOrStop} text={gameRunning ? 'Stop' : 'Start'} />
       </div>

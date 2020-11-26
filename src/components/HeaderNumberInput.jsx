@@ -1,4 +1,4 @@
-const SizeInput = ({ value, onChange, name }) => {
+const HeaderNumberInput = ({ value, onChange, name }) => {
   return (
     <input type="number" value={value} data-name={name}
       onChange={onChange} style={{
@@ -14,4 +14,4 @@ const SizeInput = ({ value, onChange, name }) => {
   );
 };
 
-export default SizeInput;
+export default HeaderNumberInput;
