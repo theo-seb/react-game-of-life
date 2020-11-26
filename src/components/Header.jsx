@@ -14,7 +14,8 @@ const Header = ({
   onStartOrStop,
   onColorGradient,
   onSizeInputChange,
-  onIntervalInputChange
+  onIntervalInputChange,
+  onRandom,
 }) => {
   return (
     <header style={{
@@ -40,6 +41,7 @@ const Header = ({
           checked={enableColorGradient} onClick={onColorGradient} />}
       </div>
       <div>
+        {!gameRunning && <HeaderButton onClick={onRandom} text="Random" />}
         {!gameRunning && <HeaderButton onClick={onClear} text="Clear" />}
         <HeaderButton onClick={onStartOrStop} text={gameRunning ? 'Stop' : 'Start'} />
       </div>

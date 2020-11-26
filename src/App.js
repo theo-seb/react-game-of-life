@@ -55,6 +55,16 @@ function App() {
     setGrid(newGrid);
   };
 
+  const randomizeGrid = () => {
+    const newGrid = getEmptyGrid(gridSize.nbRows, gridSize.nbCols);
+    for (let i = 0; i < gridSize.nbRows; i++) {
+      for (let j = 0; j < gridSize.nbCols; j++) {
+        if (Math.random() > 0.7) newGrid[i][j] = 1;
+      }
+    }
+    setGrid(newGrid);
+  };
+
   const getCellColor = (i, j) => {
     if (!enableColorGradient) return 'black';
     const val = (255 / (grid.length + grid[0].length)) * (i + j);
@@ -76,6 +86,7 @@ function App() {
         onColorGradient={() => { setEnableColorGradient(!enableColorGradient) }}
         onSizeInputChange={onSizeInputChange}
         onIntervalInputChange={onIntervalInputChange}
+        onRandom={randomizeGrid}
       />
       <Grid grid={grid}
         onCellClick={onCellClick}
